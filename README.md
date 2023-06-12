@@ -18,16 +18,17 @@ Text_To_Video 项目旨在与开源社区一起推动智能项目的工程落地
 
 
 <h3>环境准备</h3>
-1. chatglm的安装，直接访问[chatglm](https://github.com/THUDM/ChatGLM-6B)安装即可。  
-2. stable diffusion准备，下载可能比较慢，直接上传百度网盘了。  
-链接：https://pan.baidu.com/s/1OEi3nVLS-COZP5Qkmj6b-w   
-提取码：204f   
-3. chatglm、stable diffusion都要启动api服务
-4. 在data_tts.py中替换你自己的api-key
+1、 chatglm的安装，直接访问[chatglm](https://github.com/THUDM/ChatGLM-6B)安装即可。  
+2、stable diffusion准备，下载可能比较慢，直接上传百度网盘了。  
+    链接：https://pan.baidu.com/s/1OEi3nVLS-COZP5Qkmj6b-w   
+    提取码：204f   
+3、 chatglm、stable diffusion都要启动api服务
+4、 在data_tts.py中替换你自己的api-key
 
 <h3>数据准备</h3>
 具体的数据可以是爬取的小说内容，也可以是利用chatglm或者chatgpt直接生成的内容，但是文本格式要满足一下要求。
 ![img.png](img.png)  
+  
 格式说明：  
 + content是具体的文本信息
 + 每一行生成一个视频
@@ -78,4 +79,4 @@ data_to_vedio.py
 <h2>欢迎关注公众号与知识星球</h2>QQ群：1083992954
 
 ![img_1.png](img_1.png)
-![微信图片_20230612191801.jpg](..%2F..%2F..%2Ffile%2Fself%2Fimage%2F%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230612191801.jpg)
+![微信图片_20230612191801.jpg](zhishi.jpg)
