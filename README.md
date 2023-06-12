@@ -18,7 +18,7 @@ Text_To_Video 项目旨在与开源社区一起推动智能项目的工程落地
 
 
 <h3>环境准备</h3>
-1、 chatglm的安装，直接访问[chatglm](https://github.com/THUDM/ChatGLM-6B)   。安装即可。
+1、 chatglm的安装，直接访问 [chatglm](https://github.com/THUDM/ChatGLM-6B)   。安装即可。
 
 2、stable diffusion准备，下载可能比较慢，直接上传百度网盘了。  
 
