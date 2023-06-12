@@ -18,15 +18,20 @@ Text_To_Video 项目旨在与开源社区一起推动智能项目的工程落地
 
 
 <h3>环境准备</h3>
-1、 chatglm的安装，直接访问[chatglm](https://github.com/THUDM/ChatGLM-6B)安装即可。  
+1、 chatglm的安装，直接访问[chatglm](https://github.com/THUDM/ChatGLM-6B)安装即可。
+
 2、stable diffusion准备，下载可能比较慢，直接上传百度网盘了。  
+
     链接：https://pan.baidu.com/s/1OEi3nVLS-COZP5Qkmj6b-w   
     提取码：204f   
+
 3、 chatglm、stable diffusion都要启动api服务
+
 4、 在data_tts.py中替换你自己的api-key
 
 <h3>数据准备</h3>
 具体的数据可以是爬取的小说内容，也可以是利用chatglm或者chatgpt直接生成的内容，但是文本格式要满足一下要求。
+
 ![img.png](img.png)  
   
 格式说明：  
