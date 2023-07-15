@@ -1,0 +1,40 @@
+  <table>
+    <thead>
+      <tr>
+        <th>列1</th>
+        <th>列2</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in table %}
+      <tr>
+        <td>{{ row['column1'] }}</td>
+        <td>{{ row['column2'] }}</td>
+        <td>
+          <button onclick="deleteRow({{ loop.index0   }})">删除</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <script>
+    function deleteRow(row_index) {
+      if (confirm('确认要删除该行吗？')) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/delete';
+
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'row_index';
+        input.value = row_index;
+
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+      }
+    }
+  </script>
+

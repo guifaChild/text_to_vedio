@@ -1,0 +1,84 @@
+
+    <h2>生成视频</h2>
+    <div >
+      <div>
+        <h3>文件管理</h3>
+<table>
+  <tr>
+    <td>
+      <span style="cursor: pointer;" onclick="">显示文件</span>
+    </td>
+    <td>
+     <span style="cursor: pointer;"  onclick="displayFileContent()">新增文件</span>
+    </td>
+  </tr>
+</table>
+
+   <table id="file-table">
+    <thead>
+      <tr>
+        <th>文件名</th>
+        <th>生成状态</th>
+        <th>视频路径</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in table %}
+      <tr>
+        <td>{{ row['filename'] }}</td>
+        <td>{{ row['gen_status'] }}</td>
+          <td>{{ row['video_path'] }}</td>
+        <td>
+            <button onclick="viewRow({{ loop.index0   }})">查看</button>
+          <button onclick="deleteRow({{ loop.index0   }})">删除</button>
+             {% if row['gen_status'] == '未生成' %}
+        <button onclick="excuteRow({{ loop.index0 }},this)">执行</button>
+      {% endif %}
+        </td>
+
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+      </div>
+
+    </div>
+
+<div id="file-content-modal" class="modal">
+  <div class="modal-content">
+     <span class="close" onclick="closeModal()">&times;</span>
+    <div class="video-generation">
+      <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".xlsx, .xls">
+        <input type="button" onclick="uploadfile()" value="上传文件">
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!--    显示详情文件-->
+<div class="modal fade" id="dataModal">
+    xianshi
+ <div class="modal-content_data">
+
+     <span class="close" onclick="closeModal_data()">&times;</span>
+
+    <div class="video-generation">
+<table id="data_file" style="display: block !important;">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>内容</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+    </div>
+  </div>
+</div>

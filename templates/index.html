@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>简单大方的网页布局</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+ <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+ <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/file.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/video.js') }}"></script>
+<!--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+<!--   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+
+</head>
+<body>
+  <header>
+    <h1>财神张实验室</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#">QQ群:1083992954</a></li>
+      <li><a href="#">财神_张</a></li>
+      <li><a href="#">公众号：NLP团</a></li>
+        <li><a href="#" onclick="loadContent('config')">配置信息</a></li>
+        <li><a href="#" onclick="loadContent('video')">生成视频</a></li>
+        <li><a href="#" onclick="loadContent('file')">文件管理</a></li>
+        <li><a href="#" onclick="loadContent('optimization')">待优化的列表</a></li>
+<!--        <li><a href="#" onclick="loadContent('test')">测试</a></li>-->
+    </ul>
+  </nav>
+  <main id="content" style="text-align: center;">
+      <h2>欢迎来到财神张实验室，下面开启AIGC之旅吧。</button></h2>
+      <ul style="text-align: left;"><li style="text-align: left;">V1.0  简单的实现文本转视频，需要掌握基本代码操作</li>
+          <li style="text-align: left;">V2.0  增加web管理界面</li>
+      </ul>
+
+  </main>
+  <footer class="centered-footer">
+    <p>&copy; 2023 版权所有</p>
+  </footer>
+</body>
+</html>

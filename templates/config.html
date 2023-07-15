@@ -1,0 +1,16 @@
+
+
+<table style="border: none;">
+  <tr style="border: none;">
+    <td style="border: none;text-align: center; "><button onclick="show_edit()" class="btn">修改信息</button></td>
+    <td style="border: none;text-align: center; "><button id="save_data" style="display: none" class="btn">保存</button></td>
+  </tr>
+</table>
+
+<div style="padding:10px 50px 10px 50px;">
+  <div id="{{ table_id }}">
+    {{ table|safe }}
+  </div>
+</div>
+
+

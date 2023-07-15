@@ -1,0 +1,263 @@
+    /* 全局样式 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .centered-footer {
+  text-align: center;
+}
+
+    /* 头部样式 */
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* 导航栏样式 */
+    nav {
+      background-color: #666;
+      padding: 10px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px;
+    }
+
+    /* 主要内容样式 */
+    main {
+      padding: 20px;
+    }
+
+    /* 表格样式 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: left;
+    }
+
+    /* 表单样式 */
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .textbox {
+      width: 400px;
+      height: 200px;
+      resize: vertical;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn.loading {
+      position: relative;
+    }
+
+    .btn.loading::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 2px solid #fff;
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    .file-management {
+  margin-bottom: 30px;
+}
+
+#date-tree {
+  list-style: none;
+  padding-left: 0;
+}
+
+#date-tree li {
+  margin-bottom: 5px;
+}
+
+#date-tree span {
+  cursor: pointer;
+  padding-left: 20px;
+  display: inline-block;
+}
+
+#date-tree span:before {
+  content: "▶";
+  position: absolute;
+  margin-left: -15px;
+}
+
+#date-tree li ul {
+  margin-top: 5px;
+  margin-left: 20px;
+}
+
+/* 生成视频样式 */
+.video-generation {
+  margin-top: 30px;
+}
+.folder {
+  cursor: pointer;
+  padding-left: 20px;
+  display: inline-block;
+  position: relative;
+}
+
+.folder:before {
+  content: "+";
+  position: absolute;
+  left: 0;
+}
+
+.folder.open:before {
+  content: "-";
+}
+
+/* 文件样式 */
+.file {
+  cursor: pointer;
+  padding-left: 20px;
+  display: inline-block;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+#file-content-modal {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 9999;
+}
+
+.modal-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  width: 400px;
+  border-radius: 5px;
+}
+
+.modal-content input[type="file"] {
+  margin-bottom: 10px;
+}
+#dataModal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.modal-content_data {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  width: 400px;
+  border-radius: 5px;
+}

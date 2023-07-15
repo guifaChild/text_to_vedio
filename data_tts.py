@@ -8,7 +8,8 @@ import os, requests, time
 from xml.etree import ElementTree
 import pandas as pd
 # 你注册申请的微软tts的api——key
-subscription_key = "你的apikey"
+subscription_key = "你自己的key"
+
 
 class TextToSpeech(object):
     def __init__(self, subscription_key):
@@ -52,6 +53,9 @@ class TextToSpeech(object):
             print("\nStatus code: " + str(response.status_code) + "\nSomething went wrong. Check your subscription key and headers.\n")
             print("Reason: " + str(response.reason) + "\n")
 
+
+
+
     def get_voices_list(self):
         base_url = 'https://eastasia.tts.speech.microsoft.com/'
         path = 'cognitiveservices/voices/list'
@@ -64,6 +68,7 @@ class TextToSpeech(object):
             print("\nAvailable voices: \n" + response.text)
         else:
             print("\nStatus code: " + str(response.status_code) + "\nSomething went wrong. Check your subscription key and headers.\n")
+
 
 
 def load_source_data_text(path):
@@ -80,5 +85,5 @@ def load_source_data_text(path):
 
 
 if __name__ == "__main__":
-    load_source_data_text("data/data_split/侦探悬疑类/story_1.csv")
+    load_source_data_text("data/data_split/智慧公园/story_2.csv")
 

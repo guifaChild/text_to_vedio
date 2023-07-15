@@ -28,5 +28,5 @@ def split_data_process(path):
 
 
 if __name__ == '__main__':
-    split_data_process("data/source_data/example.csv")
-
+    # split_data_process("data/source_data/example.csv")
+    print(pd.__version__)

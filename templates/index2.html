@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>文本生成视频</title>
+	<style type="text/css">
+         body {
+      color: #ffffff; /* 设置全局字体颜色为红色 */
+    }
+    table {
+      width: 100%; /* 表格宽度占据整个父容器的宽度 */
+      border-collapse: collapse; /* 合并边框 */
+    }
+    th, td {
+      border: 1px solid black; /* 设置单元格边框 */
+      padding: 8px; /* 设置单元格内边距 */
+      text-align: left; /* 文本左对齐 */
+    }
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		html,body{   /*选中html，body中的元素*/
+			width: 100%;
+			height: 100%;
+			background: #1ba2dc;
+
+		}
+		div.container{
+			width: 80%;
+			height: 100%;
+			background: #1ba2dc;
+			margin: 0 auto;
+		}
+		div.header,div.footer{  选中主页的页眉和页脚
+			color: white;
+			background-color: #1ba2dc;
+			clear: left;  /*清除左浮动*/
+			text-align: center;
+			height: 80px;
+			line-height: 80px; /*行高与height属性值相同，目的是文字垂直方向居中*/
+		}
+		div.middle{
+			background-color: #1ba2dc;
+			height: 502px;
+		}
+		div.left,div.content,div.right{
+			float: left;  /*左浮动，使三个元素横向排列*/
+			background: #1ba2dc;
+			height: 100%;
+			width: 70%;
+		}
+		div.left,div.right{
+			background-color: #1ba2dc;
+			width: 15%;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<h1 class="header">文本转视频</h1>
+		</div>
+		<div class="middle">
+			<div class="left">
+				<p>QQ群：1083992954</p>
+			</div>
+			<div class="content">
+
+			  <table>
+    <tr>
+      <th>列1</th>
+      <th>列2</th>
+      <th>列3</th>
+    </tr>
+    <tr>
+      <td>数据1</td>
+      <td>数据2</td>
+      <td>数据3</td>
+    </tr>
+    <tr>
+      <td>数据4</td>
+      <td>数据5</td>
+      <td>数据6</td>
+    </tr>
+  </table>
+			</div>
+			<div class="right">
+				<p>欢迎交流</p>
+			</div>
+		</div>
+		<div class="footer">
+			仅供学习使用
+		</div>
+	</div>
+</body>
+</html>
