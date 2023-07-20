@@ -98,6 +98,7 @@ function excuteRow(index,button){
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
         console.log("执行行数据成功");
+        alert("生成完成，请重新刷新页面，查看详细视频路径");
         // 刷新表格或其他操作
       } else {
         console.error("执行行数据失败");

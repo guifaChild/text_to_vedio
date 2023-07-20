@@ -8,12 +8,27 @@ import os, requests, time
 from xml.etree import ElementTree
 import pandas as pd
 
-pdata = pd.read_csv("./config/data_1.csv")
+
+
+
+# 获取当前文件的绝对路径
+current_file_path = os.path.abspath(__file__)
+
+# 逐级向上获取上级目录，直到达到项目根目录
+project_root = os.path.dirname(current_file_path)
+while not os.path.isfile(os.path.join(project_root, 'README.md')):
+    project_root = os.path.dirname(project_root)
+
+print("项目根路径:", project_root)
+
+
+pdata = pd.read_csv(project_root+'\\config\\data_1.csv')
 
 tts_key = pdata.iloc[1, 1]
 tts_url = pdata.iloc[3, 1]
 tts_region = pdata.iloc[2, 1]
 
+print(tts_url)
 # 你注册申请的微软tts的api——key
 subscription_key = tts_key
 
@@ -92,5 +107,6 @@ def load_source_data_text(path):
 
 
 if __name__ == "__main__":
-    load_source_data_text("data/data_split/智慧公园/story_2.csv")
+    # load_source_data_text("data/data_split/智慧公园/story_2.csv")
+    pass
 

@@ -8,7 +8,16 @@ import os, requests, time
 from xml.etree import ElementTree
 import pandas as pd
 
-pdata = pd.read_csv("./config/data_1.csv")
+current_file_path = os.path.abspath(__file__)
+
+# 逐级向上获取上级目录，直到达到项目根目录
+project_root = os.path.dirname(current_file_path)
+while not os.path.isfile(os.path.join(project_root, 'README.md')):
+    project_root = os.path.dirname(project_root)
+
+
+
+pdata = pd.read_csv(project_root+'\\config\\data_1.csv')
 
 tts_key = pdata.iloc[1, 1]
 tts_url = pdata.iloc[3, 1]
