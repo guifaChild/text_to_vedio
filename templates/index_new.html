@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+  <title>财神张</title>
+
+        <!-- App css -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/icons.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/theme.min.css') }}">
+
+    </head>
+    <style>
+
+ #page-topbar{
+     z-index: 2013;
+ }
+ .navbar-header{
+     margin-left: 0;
+     height: 120px;
+ }
+ .vertical-menu{
+     top: 140px;
+ }
+    </style>
+
+    <body>
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+            
+            <div class="header-border"></div>
+            <header id="page-topbar">
+                <div class="navbar-header" style="display: grid;place-items: center;padding-left: 400px;">
+
+                                <div class="card-body" style="display: grid;place-items: center;">
+                                    <h1 class="card-title" style="font-size: 36px;color: #3366cc; ">财神张实验室</h1>
+                                    <div class="button-examples">
+                                         <button type="button" onclick="redirectToPage('index_new')" class="btn btn-secondary waves-effect waves-light">首 页</button>
+                                        <button type="button" onclick="redirectToPage('contract')" class="btn btn-primary waves-effect waves-light">我的联系方式</button>
+                                        <button type="button" onclick="redirectToPage('config_header')" class="btn btn-secondary waves-effect waves-light">配置信息</button>
+                                        <button type="button" onclick="redirectToPage('video')" class="btn btn-success waves-effect waves-light">视频合成</button>
+                                        <button type="button" class="btn btn-danger waves-effect waves-light">配置信息</button>
+                                        <button type="button" class="btn btn-warning waves-effect waves-light">自媒体项目</button>
+                                        <button type="button" class="btn btn-info waves-effect waves-light">文件管理</button>
+                                        <button type="button" class="btn btn-light waves-effect">后续优化</button>
+                                        <button type="button" class="btn btn-dark waves-effect waves-light">Dark</button>
+                                        <button type="button" class="btn btn-link waves-effect">  Link</button>
+                                    </div>
+
+                                </div>
+
+
+                </div>
+            </header>
+            <div class="vertical-menu" id="content_header">
+                <div data-simplebar class="h-100">
+
+                    <div class="navbar-brand-box">
+                        <a href="index.html" class="logo">
+                            <i class="mdi mdi-album"></i>
+                            <span>
+                                财神开张
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content" >
+
+                <div class="page-content">
+                    <div id="container-fluid" >
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-flex align-items-center justify-content-between">
+                                    <h4 class="mb-0 font-size-18">Dashboard</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Xeloro</a></li>
+                                            <li class="breadcrumb-item active">Dashboard</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+{#                         <iframe name="iframeBody" class="iframe-body"  style="display: block; width: 100%; height: 600px" frameborder="0" marginheight="0" marginwidth="0" frameborder="0" scrolling="auto"> #}
+{#     										 </iframe>#}
+                        <!-- end row-->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="card-title">欢迎来到财神张实验室，下面开启AIGC之旅吧。</h4>
+                                    <p class="card-subtitle mb-4"> 这是个AIGC帮助你赚钱的网站</p>
+
+                                    <div class="media mb-3">
+
+                                        <div class="media-body">
+                                            <h5 class="mt-0">V1.0 </h5>
+                                           简单的实现文本转视频，需要掌握基本代码操作
+                                        </div>
+                                    </div>
+                                    <div class="media mb-3">
+
+                                        <div class="media-body">
+                                            <h5 class="mt-0">V2.0  </h5>
+                                          增加web管理界面
+                                        </div>
+                                    </div>
+
+
+                                </div> <!-- end card-body-->
+                            </div> <!-- end card-->
+                        </div> <!-- end col -->
+                    </div>
+
+                       
+
+
+                        
+                        <!--end row-->
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                
+© 2023 版权所有
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-sm-right d-none d-sm-block">
+                                    Design & Develop by 财神张
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+        <!-- Overlay-->
+        <div class="menu-overlay"></div>
+
+        <!-- jQuery  -->
+
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/metismenu.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/waves.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/simplebar.min.js') }}"></script>
+        <!-- Sparkline Js-->
+        <script src="{{ url_for('static', filename='js/jquery.sparkline.min.js') }}"></script>
+        <!-- Chart Js-->
+        <script src="{{ url_for('static', filename='js/jquery.knob.min.js') }}"></script>
+        <!-- Chart Custom Js-->
+         <script src="{{ url_for('static', filename='js/knob-chart-demo.js') }}"></script>
+        <!-- Morris Js-->
+        <script src="{{ url_for('static', filename='js/morris.min.js') }}"></script>
+        <!-- Raphael Js-->
+        <script src="{{ url_for('static', filename='js/raphael.min.js') }}"></script>
+        <!-- Custom Js -->
+        <script src="{{ url_for('static', filename='js/dashboard-demo.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+        <!-- App js -->
+
+
+    </body>
+
+</html>

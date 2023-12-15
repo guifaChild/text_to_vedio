@@ -9,9 +9,10 @@ import os
 import json
 import requests
 
-from single_gen.single_to_image import draw_picture
-from single_gen.single_to_vedio import merge_vedio
-from single_gen.single_tts import load_source_data_text
+from .single_to_image import draw_picture
+from .single_to_vedio import merge_vedio
+from .single_tts import load_source_data_text
+from .single_to_vedio import remerge_vedio
 current_file_path = os.path.abspath(__file__)
 # 逐级向上获取上级目录，直到达到项目根目录
 project_root = os.path.dirname(current_file_path)
@@ -56,21 +57,21 @@ def split_data_process(path,title):
         content = [x.strip().replace("\n","") for x in content if len(x.strip()) > 0]
         # 创建新的文件保存切割后的文件
         each_df = pd.DataFrame(content,columns=["text"])
-        data_csv_path = os.path.join(project_root+"\\data\\data_split", title)
+        data_csv_path = os.path.join(project_root+"\\static\\data\\data_split", title)
         if not os.path.exists(data_csv_path):
             os.mkdir(data_csv_path)
         csv_save_path = data_csv_path+'\\'+title + ".csv"
         each_df.to_csv(csv_save_path,index=False)
     return csv_save_path
 
-
+"""真正的生成视频"""
 def gen_video(title,content):
     df = pd.DataFrame(columns=['title',  'content'])
     new_row = {'title': title, 'content': content}
     df = df.append(new_row, ignore_index=True)
-    df.to_csv(project_root+'\\data\\source_data\\'+title+'.csv', index=False, encoding='utf-8')
+    df.to_csv(project_root+'\\static\\data\\source_data\\'+title+'.csv', index=False, encoding='utf-8')
     # 分割数据
-    split_path = split_data_process(project_root+'\\data\\source_data\\'+title+'.csv',title)
+    split_path = split_data_process(project_root+'\\static\\data\\source_data\\'+title+'.csv',title)
     # 生成提示词
     prompp_path = load_data_text(split_path,title)
     # 生成语音
@@ -83,8 +84,8 @@ def gen_video(title,content):
     return video_path
 
 
-
-
+def remerge_video(imagpath,audio_path,vediopath):
+    return remerge_vedio(imagpath,audio_path,vediopath)
 
 
 

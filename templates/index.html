@@ -3,13 +3,15 @@
 <head>
   <title>简单大方的网页布局</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
- <script src="{{ url_for('static', filename='js/index.js') }}"></script>
- <script src="{{ url_for('static', filename='js/config.js') }}"></script>
-     <script src="{{ url_for('static', filename='js/file.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/video.js') }}"></script>
-<!--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-<!--   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+<script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}">
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap-treeview.min.js') }}"></script>
+</script><script src="{{ url_for('static', filename='js/index.js') }}"></script>
+<script src="{{ url_for('static', filename='js/config.js') }}"></script>
+<script src="{{ url_for('static', filename='js/file.js') }}"></script>
+<script src="{{ url_for('static', filename='js/video.js') }}"></script>
+
 
 </head>
 <body>
@@ -18,8 +20,8 @@
   </header>
   <nav>
     <ul>
-      <li><a href="#">QQ群:1083992954</a></li>
-      <li><a href="#">财神_张</a></li>
+      <li><a href="#" onclick="loadContent('qq')">QQ群:1083992954</a></li>
+      <li><a href="#">财神开张</a></li>
       <li><a href="#">公众号：NLP团</a></li>
         <li><a href="#" onclick="loadContent('config')">配置信息</a></li>
         <li><a href="#" onclick="loadContent('video')">生成视频</a></li>
@@ -29,7 +31,7 @@
     </ul>
   </nav>
   <main id="content" style="text-align: center;">
-      <h2>欢迎来到财神张实验室，下面开启AIGC之旅吧。</button></h2>
+      <h2>欢迎来到财神张实验室，下面开启AIGC之旅吧。</h2>
       <ul style="text-align: left;"><li style="text-align: left;">V1.0  简单的实现文本转视频，需要掌握基本代码操作</li>
           <li style="text-align: left;">V2.0  增加web管理界面</li>
       </ul>
@@ -38,5 +40,51 @@
   <footer class="centered-footer">
     <p>&copy; 2023 版权所有</p>
   </footer>
+
+
+
+
+<div id="tree"></div>
+
+<script type="javascript">
+var defaultData = [
+  {
+    text:"Parent 1", // text 定义菜单标题
+    nodes: [  // nodes 定义子菜单
+      {
+        text:"Child 1",  // 子菜单标题
+        nodes: [  // 子菜单的子菜单
+          {
+            text:"Grandchild 1"
+          },
+          {
+            text:"Grandchild 2"
+          }
+        ]
+      },
+      {
+        text:"Child 2"
+      }
+    ]
+  },
+  {
+    text:"Parent 2"
+  },
+  {
+    text:"Parent 3"
+  },
+  {
+    text:"Parent 4"
+  },
+  {
+    text:"Parent 5"
+  }
+];
+
+
+$('#treeview').treeview({
+    data: defaultData,
+});
+</script>
 </body>
 </html>

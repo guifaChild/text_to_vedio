@@ -1,16 +1,44 @@
+    <style>
+        /* 自定义 CSS，将表格头和表格内容都左对齐 */
+        #my-table thead th, #example tbody td {
+            text-align: left;
+        }
+    </style>
+       <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">Datatables</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                                        <li class="breadcrumb-item active">Datatables</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">本地配置信息</h4>
+
+                                    <p class="card-subtitle mb-4"><div class="button-examples">
+<button type="button" onclick="show_edit()" class="btn btn-primary btn-lg waves-effect waves-light">修改配置</button>
+                                    <button id="save_data" style="display: none" type="button"  class="btn btn-secondary btn-lg waves-effect waves-light">保存</button></div>
+                                    </p>
+
+                                     {{ table|safe }}
+
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
 
 
-<table style="border: none;">
-  <tr style="border: none;">
-    <td style="border: none;text-align: center; "><button onclick="show_edit()" class="btn">修改信息</button></td>
-    <td style="border: none;text-align: center; "><button id="save_data" style="display: none" class="btn">保存</button></td>
-  </tr>
-</table>
 
-<div style="padding:10px 50px 10px 50px;">
-  <div id="{{ table_id }}">
-    {{ table|safe }}
-  </div>
-</div>
 
 

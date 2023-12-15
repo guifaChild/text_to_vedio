@@ -9,7 +9,7 @@ import pandas as pd
 import os
 
 def split_data_process(path):
-    data_csv_path=""
+    data_csv_path = ""
     df = pd.read_csv(path)
     for i in range(len(df)):
         type_path = df["type"][i]

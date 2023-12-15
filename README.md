@@ -93,7 +93,8 @@ data_to_vedio.py
 未经许可，严禁商用。
 
 
-<h2>欢迎关注公众号与知识星球</h2>QQ群：1083992954
+<h2>欢迎关注公众号与知识星球,有问题可以公众号留言</h2>QQ群：1083992954
 
 ![image/img_1.png](image/img_1.png)
+![image/img_1.png](image/img_3.png)
 ![微信图片_20230612191801.jpg](image/zhishi.jpg)

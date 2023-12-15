@@ -1,0 +1,65 @@
+    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">Form Elements</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
+                                        <li class="breadcrumb-item active">Elements</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Form Controls </h4>
+                                    <p class="card-subtitle mb-4">Textual form controls—like <code>input</code>s,<code> selects</code>, and<code> textare</code>s—are styled with the .form-control class. Included are styles for general appearance, focus state, sizing, and more. </p>
+
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="simpleinput">视频名称</label>
+                                            <input type="text" id="title_video" class="form-control" placeholder="尽量使用英文">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">视频文案</label>
+                                            <textarea class="form-control" id="content_data" placeholder="为了保证视频质量，标点符号完整用，每句话的字数差距不易过大"  rows="3"></textarea>
+                                        </div>
+
+                                          <div class="form-group">
+                                       <button type="button" onclick="sendRequest(this)" class="btn btn-primary btn-lg waves-effect waves-light">合成视频</button>
+                                        <div id="circle_reading" style="display: none" class="spinner-border text-primary m-2" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                        </div>
+                                          </div>
+
+
+
+                                    </form>
+
+                                </div>
+                                <!-- end card-body-->
+
+
+                            </div>
+                            <!-- end card -->
+
+                        </div> <!-- end col -->
+
+                    </div>
+
+
+{#<div class="container">#}
+{#  <span></span><label>标题：</label>#}
+{#  <input id="title_video"><span></span>#}
+{#  <textarea id="content_data" class="textbox" placeholder="请输入长文本"></textarea>#}
+{#  <button class="btn" onclick="sendRequest(this)">生成视频</button>#}
+{#</div>#}
+

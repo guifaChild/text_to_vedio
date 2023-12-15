@@ -1,84 +1,128 @@
+<style>
 
-    <h2>生成视频</h2>
-    <div >
-      <div>
-        <h3>文件管理</h3>
-<table>
-  <tr>
-    <td>
-      <span style="cursor: pointer;" onclick="">显示文件</span>
-    </td>
-    <td>
-     <span style="cursor: pointer;"  onclick="displayFileContent()">新增文件</span>
-    </td>
-  </tr>
-</table>
+    #file-content-modal {
+    margin-top: 150px;
+}
+        #dataModal {
+    margin-top: 150px;
+}
+</style>
+<div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">视频合成</h4>
 
-   <table id="file-table">
-    <thead>
-      <tr>
-        <th>文件名</th>
-        <th>生成状态</th>
-        <th>视频路径</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in table %}
-      <tr>
-        <td>{{ row['filename'] }}</td>
-        <td>{{ row['gen_status'] }}</td>
-          <td>{{ row['video_path'] }}</td>
-        <td>
-            <button onclick="viewRow({{ loop.index0   }})">查看</button>
-          <button onclick="deleteRow({{ loop.index0   }})">删除</button>
-             {% if row['gen_status'] == '未生成' %}
-        <button onclick="excuteRow({{ loop.index0 }},this)">执行</button>
-      {% endif %}
-        </td>
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                                        <li class="breadcrumb-item active">Datatables</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+<div class="row">
+                        <div class="col-xl-12">
+
+                            <!-- end card -->
+                             <div class="card">
+                                <div class="card-body">
+                                   <div id="file-content-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalPopoversLabel">Modal title</h5>
+                                                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Dropify</h4>
+                                                <p class="card-subtitle mb-4">Override your input files with style. Your so fresh input file — Default version.</p>
+                                            <form id="upload-form" enctype="multipart/form-data">
+                                                    <input type="file" class="dropify" data-height="40" name="file" accept=".xlsx, .xls">
+                                                  </form>
+
+                                </div> <!-- end card-body-->
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button id="close_window" type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">Close</button>
+                                                <button type="button" onclick="uploadfile()" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div id="dataModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalPopoversLabel">Modal title</h5>
+                                                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                          <table id="data_file" class="table dt-responsive nowrap" style="display: block !important;">
+                                                    <thead>
+                                                      <tr>
+                                                        <th>名称</th>
+                                                        <th>内容</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                  </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">Close</button>
+                                                <button type="button" onclick="uploadfile()" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="card-title">文件管理</h4>
+                                    <p class="card-subtitle mb-4">
+                                       <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#file-content-modal">
+                                    新增文件</button>
+                                    </p>
+
+                                    <table id="file-table" class="table dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>文件名成</th>
+                                                <th>生成状态</th>
+                                                <th>视频路径</th>
+                                                <th>操作</th>
+
+                                            </tr>
+                                        </thead>
 
 
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-      </div>
+                                        <tbody>
+                                            {% for row in table %}
+                                              <tr>
+                                                <td>{{ row['filename'] }}</td>
+                                                <td>{{ row['gen_status'] }}</td>
+                                                  <td>{{ row['video_path'] }}</td>
+                                                <td>
+                                                 <button   class="btn btn-info btn-sm waves-effect waves-light" onclick="viewRow({{ loop.index0   }})">查看</button>
+{#                                                    <button  data-target="#dataModal" class="btn btn-info btn-sm waves-effect waves-light" onclick="viewRow({{ loop.index0   }})">查看</button>#}
+                                                  <button class="btn btn-danger btn-sm waves-effect waves-light" onclick="deleteRow({{ loop.index0   }})">删除</button>
+                                                     {% if row['gen_status'] == '未生成' %}
+                                                <button class="btn btn-info btn-sm waves-effect waves-light" onclick="excuteRow({{ loop.index0 }},this)">执行</button>
+                                              {% endif %}
+                                                </td>
+                                              </tr>
+                                              {% endfor %}
+                                        </tbody>
+                                    </table>
 
-    </div>
-
-<div id="file-content-modal" class="modal">
-  <div class="modal-content">
-     <span class="close" onclick="closeModal()">&times;</span>
-    <div class="video-generation">
-      <form id="upload-form" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".xlsx, .xls">
-        <input type="button" onclick="uploadfile()" value="上传文件">
-      </form>
-    </div>
-  </div>
-</div>
-</div>
-
-
-<!--    显示详情文件-->
-<div class="modal fade" id="dataModal">
-    xianshi
- <div class="modal-content_data">
-
-     <span class="close" onclick="closeModal_data()">&times;</span>
-
-    <div class="video-generation">
-<table id="data_file" style="display: block !important;">
-    <thead>
-      <tr>
-        <th>名称</th>
-        <th>内容</th>
-      </tr>
-    </thead>
-    <tbody>
-
-    </tbody>
-  </table>
-    </div>
-  </div>
-</div>
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                        </div>
+                        <!-- end col -->

@@ -28,7 +28,7 @@ def prompt_generation(param):
 
 def load_data_text(path):
     # 读取指定的文件进行加载处理
-    if path =="" :
+    if path == "":
         path="data/data_split/侦探悬疑类/story_1.csv"
     df = pd.DataFrame(columns=['text', 'index', 'prompt', 'negative'])
     df_temp = pd.read_csv(path)

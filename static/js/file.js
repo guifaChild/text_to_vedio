@@ -25,8 +25,8 @@ function uploadfile(){
       if (xhr.status === 200) {
         // 上传成功，更新消息容器的内容
           alert("上传成功");
-          closeModal();
-           document.getElementById('content').innerHTML = xhr.responseText;
+           $("#close_window").click();
+           document.getElementById('container-fluid').innerHTML = xhr.responseText;
       } else {
         // 上传失败，显示错误消息
         document.getElementById("upload-message").textContent = "文件上传失败！";
@@ -43,23 +43,7 @@ function viewRow(index){
   xhr.onreadystatechange = function() {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
-        var rowData = JSON.parse(xhr.responseText);
-         const fileTable = document.getElementById("data_file");
-        const tbody = fileTable.querySelector("tbody");
-        tbody.innerHTML = "";
-        rowData.forEach(file => {
-      const row = document.createElement("tr");
-      const filenameCell = document.createElement("td");
-      filenameCell.textContent = file.title;
-      const contentCell = document.createElement("td");
-      contentCell.textContent = file.content;
-      row.appendChild(filenameCell);
-      row.appendChild(contentCell);
-      tbody.appendChild(row);
-    });
-
-          showModal();
-        console.log("查看行数据:", rowData);
+        document.getElementById('container-fluid').innerHTML = xhr.responseText;
       } else {
         console.error("查看行数据失败");
       }
@@ -75,7 +59,7 @@ function deleteRow(index){
   xhr.onreadystatechange = function() {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
-         document.getElementById('content').innerHTML = xhr.responseText;
+         document.getElementById('container-fluid').innerHTML = xhr.responseText;
         console.log("删除行数据成功");
         // 刷新表格或其他操作
       } else {
@@ -118,4 +102,23 @@ function showModal() {
  function   closeModal_data(){
  const modal = document.getElementById("dataModal");
      modal.style.display = "none";
+ }
+
+
+ function showfileDetail(title,imgpath){
+  var filename =imgpath.split("/")[3];
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        document.getElementById('container-fluid').innerHTML = xhr.responseText;
+        console.log("查看行数据:");
+      } else {
+        console.error("查看行数据失败");
+      }
+    }
+  };
+  xhr.open("GET", "/show_filedetail?title="+title+"&filename="+filename);
+  xhr.send();
+
  }

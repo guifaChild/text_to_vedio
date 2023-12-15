@@ -8,7 +8,7 @@ import os, requests, time
 from xml.etree import ElementTree
 import pandas as pd
 # 你注册申请的微软tts的api——key
-subscription_key = "你自己的key"
+subscription_key = ""
 
 
 class TextToSpeech(object):
@@ -85,5 +85,5 @@ def load_source_data_text(path):
 
 
 if __name__ == "__main__":
-    load_source_data_text("data/data_split/智慧公园/story_2.csv")
+    load_source_data_text("data/data_split/测试_2/测试_2.csv")
 

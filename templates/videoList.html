@@ -1,0 +1,76 @@
+<style>
+
+    #file-content-modal {
+    margin-top: 150px;
+}
+        #dataModal {
+    margin-top: 150px;
+}
+</style>
+<div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">视频合成</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                                        <li class="breadcrumb-item active">Datatables</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+<div class="row">
+                        <div class="col-xl-12">
+
+                            <!-- end card -->
+                             <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">文件管理</h4>
+                                    <p class="card-subtitle mb-4">
+
+                                    </p>
+
+                                    <table id="video-table" class="table dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 20% !important;">视频名称</th>
+                                                <th style="width: 20% !important;">视频文本</th>
+
+                                                <th style="width: 20% !important;">视频</th>
+{#                                                <th style="width: 20% !important;">视频路径</th>#}
+                                                <th style="width: 20% !important;">操作</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            {% for row in table %}
+                                              <tr>
+                                                <td  style="width: 20% !important;">{{ row['title'] }}</td>
+                                                <td  style="width: 20% !important;">{{ row['content'] }}</td>
+
+                                                  <td  style="width: 20% !important;"><video width="300" height="300" controls>
+  <source src="{{ row['video_html_path'] }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video></td>
+{#                                                <td  style="width: 20% !important;">{{ row['video_path'] }}</td>#}
+                                                <td  style="width: 20% !important;">
+                                                 <button  data-toggle="modal" data-target="#dataModal" class="btn btn-info btn-sm waves-effect waves-light" onclick="showDetail('{{ row['title'] }}')">查看</button>
+{#                                                    <button  data-target="#dataModal" class="btn btn-info btn-sm waves-effect waves-light" onclick="viewRow({{ loop.index0   }})">查看</button>#}
+                                                  <button class="btn btn-danger btn-sm waves-effect waves-light" onclick="deleteDetail('{{ row['title'] }}')">删除</button>
+
+
+
+                                                </td>
+                                              </tr>
+                                              {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                        </div>
+                        <!-- end col -->

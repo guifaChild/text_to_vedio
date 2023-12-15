@@ -261,3 +261,12 @@
   width: 400px;
   border-radius: 5px;
 }
+.image-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image-item {
+  text-align: center;
+}
+

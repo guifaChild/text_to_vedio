@@ -1,0 +1,153 @@
+   <style>
+
+    #detailModal {
+    margin-top: 130px;
+}
+</style>
+    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">Form Elements</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
+                                        <li class="breadcrumb-item active">Elements</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                <div id="detailModal"  class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable modal-xl"  role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                                                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+{#                                    <form class="form-horizontal">#}
+                                         <div class="form-group row mb-lg-3">
+                                         <input type="hidden" id="hiddenValue" name="hiddenValue" value="your_hidden_value">
+                                        <label for="exampleFormControlTextarea1">text文本内容</label>
+                                         <textarea id="imagetext" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                         <div class="form-group row mb-3">
+                                        <label for="exampleFormControlTextarea1">prompt</label>
+                                            <textarea id="imageprompt" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                          <div class="form-group row mb-3">
+                                        <label for="exampleFormControlTextarea1">negtive</label>
+                                            <textarea id ="imagenegitve" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group row mb-3">
+                                        <img id="imagepath" src="" alt="Image" width="200" height="200">
+                                        <div class="form-group mb-0 justify-content-end row">
+                                            <div class="col-9">
+                                                <button  class="btn btn-info waves-effect waves-light" onclick="regenerateImage();">图片重新生成</button>
+                                            </div>
+                                        </div>
+                                        </div>
+{#                                    </form>#}
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button id ="close_regearete"  type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="card-title">Form Controls </h4>
+                                <table  class="table dt-responsive nowrap">
+                                    <tbody>
+                                    <tr>
+                                        <td>文件路径：</td>
+                                        <td> {{ vedio_path }}</td>
+                                    </tr>
+                                    <tr>
+                                         <td style="vertical-align: middle;text-align: center;"><button type="button" onclick="remerge('{{ vedio_html_path }}');" class="btn btn-primary waves-effect waves-light" >
+                                    重新合成</button></td>
+                                        <td> <video width="300" height="250" controls>
+  <source id="source_video" src="{{ vedio_html_path }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video> </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+
+
+       <table id="file_single" class="table dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 20%;">文本内容</th>
+                                                <th style="display: none">索引</th>
+                                                <th style="width: 20%;">提示</th>
+                                                <th style="display: none">负向词</th>
+                                                <th style="width: 20%;">图片</th>
+                                                <th style="width: 20%;">语音</th>
+                                                <th style="width: 20%;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for row in table %}
+                                              <tr>
+                                                <td>{{ row['text'] }}</td>
+                                                  <td style="display: none">{{ row['index'] }}</td>
+                                                <td>{{ row['prompt'] }}</td>
+                                                  <td style="display: none">{{ row['negative'] }}</td>
+                                                  <td><img src="{{ row['image_path'] }}" alt="Image" width="200" height="200"></td>
+                                              <td><audio controls><source src="{{ row['tts_path'] }}" type="audio/wav"></audio></td>
+                                                <td>
+                                                 <button  data-toggle="modal" data-target="#detailModal" class="btn btn-info btn-sm waves-effect waves-light" onclick="viewdetailContent(this)">重新生成</button>
+{#                                                    <button  data-target="#dataModal" class="btn btn-info btn-sm waves-effect waves-light" onclick="viewRow({{ loop.index0   }})">查看</button>#}
+
+
+                                                </td>
+                                              </tr>
+                                              {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!-- end card-body-->
+
+
+                            </div>
+                            <!-- end card -->
+
+                        </div> <!-- end col -->
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
