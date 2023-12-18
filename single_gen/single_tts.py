@@ -69,6 +69,33 @@ class TextToSpeech(object):
             print("\nStatus code: " + str(response.status_code) + "\nSomething went wrong. Check your subscription key and headers.\n")
             print("Reason: " + str(response.reason) + "\n")
 
+    def re_save_audio(self, data, child_path,role_name):
+        base_url = 'https://' + tts_region + '.tts.speech.microsoft.com/'
+        path = 'cognitiveservices/v1'
+        constructed_url = base_url + path
+        headers = {
+            'Authorization': 'Bearer ' + self.access_token,
+            'Content-Type': 'application/ssml+xml',
+            'X-Microsoft-OutputFormat': 'riff-24khz-16bit-mono-pcm',
+            'User-Agent': 'TTSForPython'
+        }
+        xml_body = ElementTree.Element('speak', version='1.0')
+        xml_body.set('{http://www.w3.org/XML/1998/namespace}lang', 'en-us')
+        voice = ElementTree.SubElement(xml_body, 'voice')
+        voice.set('{http://www.w3.org/XML/1998/namespace}lang', 'en-US')
+        voice.set('name', role_name)
+        voice.set(' rate ', '1.4')
+        voice.text = data
+        body = ElementTree.tostring(xml_body)
+        response = requests.post(constructed_url, headers=headers, data=body)
+        if response.status_code == 200:
+            with open(child_path, 'wb') as audio:
+                audio.write(response.content)
+                # print("\nStatus code: " + str(response.status_code) + "\nYour TTS is ready for playback.\n")
+        else:
+            print("\nStatus code: " + str(
+                response.status_code) + "\nSomething went wrong. Check your subscription key and headers.\n")
+            print("Reason: " + str(response.reason) + "\n")
 
 
 
@@ -98,6 +125,13 @@ def load_source_data_text(path):
         path_child =os.path.join(new_path,str(index))
         app.save_audio(row['text'],path_child)
     return new_path
+
+def re_generate_audio(textcontent, audio_role, newpath):
+    app = TextToSpeech(subscription_key)
+    app.get_token()
+    # os.remove(newpath)
+    app.re_save_audio(textcontent, newpath,audio_role)
+    return newpath
 
 
 if __name__ == "__main__":

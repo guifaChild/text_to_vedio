@@ -50,12 +50,30 @@
                                             <textarea id ="imagenegitve" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                         </div>
                                         <div class="form-group row mb-3">
-                                        <img id="imagepath" src="" alt="Image" width="200" height="200">
-                                        <div class="form-group mb-0 justify-content-end row">
-                                            <div class="col-9">
-                                                <button  class="btn btn-info waves-effect waves-light" onclick="rebatchgenerateImage()">图片重新生成</button>
-                                            </div>
-                                        </div>
+                                         <table class="table mb-0" style="">
+                                                <tr>
+                                                     <td style=" vertical-align: middle;"><img id="imagepath" src="" alt="Image" width="200" height="200"></td>
+                                                    <td style=" vertical-align: middle;"><audio  id="audio_path"  controls src="" type="audio/wav"></audio></td>
+                                                    <td style=" vertical-align: middle;"> <label for="exampleFormControlTextarea1">角色选择,根据在tts中角色的名称</label></td>
+                                                    <td style=" vertical-align: middle;"> <input  id="audio_role" name="hiddenValue" value="zh-CN-YunxiNeural"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style=" vertical-align: middle;">
+                                                <button  class="btn btn-info waves-effect waves-light" onclick="rebatchgenerateImage();">图片重新生成</button>
+                                                        </td>
+                                                    <td  style=" vertical-align: middle;">
+
+                                                        </td>
+                                                     <td  style=" vertical-align: middle;">
+                                                <button  class="btn btn-info waves-effect waves-light" onclick="rebatchgenerateAudio();">语音重新生成</button>
+                                                        </td>
+                                                     <td  style=" vertical-align: middle;">
+
+                                                        </td>
+
+                                                </tr>
+                                                </table>
+
                                         </div>
 {#                                    </form>#}
 

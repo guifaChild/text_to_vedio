@@ -70,12 +70,17 @@ function viewdetailContent(button){
     var prompt = currentRow.find('td:eq(2)').text();
     var negative = currentRow.find('td:eq(3)').text();
      var image_path = currentRow.find('img').attr('src');
+    var audioSrc = currentRow.find('audio source').attr('src');
+
+     // audio_path
+
 
  $("#imagetext").val(title);
   $("#imageprompt").val(prompt);
    $("#imagenegitve").val(negative);
     $("#imagepath").attr("src", image_path);
      $("#hiddenValue").val(index);
+      $("#audio_path").attr("src", audioSrc);
 }
 
 
@@ -154,6 +159,72 @@ function remerge(image_path){
                 alert("合成完成");
             })
             .catch(error => console.error(error));
+}
+
+
+function regenerateAudio(){
+
+const audio_role = $("#audio_role").val();
+const imagetext = $("#imagetext").val();
+var audioSrc = $("#audio_path").attr("src");
+const index = $("#hiddenValue").val();
+var titles = audioSrc.split('/');
+var leng=titles.length;
+//
+// var imagetitle = titles[leng-3];
+var title  = titles[leng-2];
+
+
+  fetch('/reaudiogenerate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ imagetext: imagetext ,audio_role :audio_role,index:index,title:title})
+            })
+            .then(response => response.text())
+            .then(data => {
+                var timestamp = new Date().getTime();
+
+                 $("#audio_path").attr("src", audioSrc+'?'+ timestamp);
+                 // $("#imagepath").attr("src", image_path);  表格中也进行替换
+                // $("#file_single tbody tr:eq(" + index + ") td:eq(4)").find("img").attr("src",imgSrc+ '?' + timestamp)
+                alert("成功生成");
+            })
+            .catch(error => console.error(error));
+
+}
+function rebatchgenerateAudio(){
+
+const audio_role = $("#audio_role").val();
+const imagetext = $("#imagetext").val();
+var audioSrc = $("#audio_path").attr("src");
+const index = $("#hiddenValue").val();
+var titles = audioSrc.split('/');
+var leng=titles.length;
+//
+var imagetitle = titles[leng-3];
+var title  = titles[leng-2];
+
+
+  fetch('/rebatchaudiogenerate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ imagetext: imagetext ,audio_role :audio_role,index:index,title:title,filename:imagetitle})
+            })
+            .then(response => response.text())
+            .then(data => {
+                var timestamp = new Date().getTime();
+
+                 $("#audio_path").attr("src", audioSrc+'?'+ timestamp);
+                 // $("#imagepath").attr("src", image_path);  表格中也进行替换
+                // $("#file_single tbody tr:eq(" + index + ") td:eq(4)").find("img").attr("src",imgSrc+ '?' + timestamp)
+                alert("成功生成");
+            })
+            .catch(error => console.error(error));
+
 }
 
 

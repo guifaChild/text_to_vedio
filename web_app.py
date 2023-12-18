@@ -7,7 +7,7 @@
 from batch_gen.batch_controller import bach_gen_video
 from single_gen.controller import gen_video, remerge_video
 from single_gen.single_to_image import regen_video
-
+from single_gen.single_tts import re_generate_audio
 # -*- coding:utf-8 -*-
 """
 作者：张贵发
@@ -292,6 +292,40 @@ def regenerate():
     video_path = regen_video(imageprompt,imagenegitve,newpath)
 
     return jsonify(video_path)
+
+
+
+@app.route('/reaudiogenerate', methods=['POST'])
+def reaudiogenerate():
+    data = request.get_json()
+    textcontent = data.get('imagetext')
+    audio_role = data.get('audio_role')
+    index = data.get('index')
+    title = data.get('title')
+    # 根据索引获取指定行数据
+    # 返回 JSON 格式的数据
+    newpath = project_root + '\\static\\data\\data_audio\\' + title + '\\' + title + "\\" + str(index) + '.wav'
+    video_path = re_generate_audio(textcontent, audio_role, newpath)
+
+    return jsonify(video_path)
+
+
+@app.route('/rebatchaudiogenerate', methods=['POST'])
+def rebatchaudiogenerate():
+    data = request.get_json()
+    textcontent = data.get('imagetext')
+    audio_role = data.get('audio_role')
+    index = data.get('index')
+    title = data.get('title')
+    filename = data.get('filename')
+    # 根据索引获取指定行数据
+    # 返回 JSON 格式的数据
+    newpath = project_root + '\\static\\data\\data_audio\\' + filename + '\\' + title + "\\" + str(index) + '.wav'
+    video_path = re_generate_audio(textcontent, audio_role, newpath)
+
+    return jsonify(video_path)
+
+
 
 
 
