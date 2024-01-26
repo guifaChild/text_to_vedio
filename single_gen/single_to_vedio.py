@@ -11,6 +11,8 @@ from moviepy.editor import ImageSequenceClip, AudioFileClip, concatenate_videocl
 
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
+from text_to_vedio.single_gen.jianying import draft_content
+
 speed = 10
 size = 700
 
@@ -54,6 +56,7 @@ def merge_vedio(image_dir_path, audio_dir_path):
         item.close()
     for i in range(len(items)):
         os.remove(new_parent + "\\" + str(i) + ".mp4")
+    draft_content(image_dir_path, audio_dir_path,new_parent)
     return new_path+".mp4"
 
 
@@ -86,6 +89,7 @@ def remerge_vedio(image_dir_path, audio_dir_path,new_parent):
         item.close()
     for i in range(len(items)):
         os.remove(new_parent + "\\" + str(i) + ".mp4")
+    draft_content(image_dir_path, audio_dir_path, new_parent)
     return new_parent+".mp4"
 
 
