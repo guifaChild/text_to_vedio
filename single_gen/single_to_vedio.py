@@ -11,7 +11,7 @@ from moviepy.editor import ImageSequenceClip, AudioFileClip, concatenate_videocl
 
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
-from text_to_vedio.single_gen.jianying import draft_content
+from single_gen.jianying import draft_content
 
 speed = 10
 size = 700
