@@ -39,8 +39,14 @@ def merge_vedio(image_dir_path,audio_dir_path,parent):
         os.makedirs(new_parent)
     print("文件路径："+new_parent)
     for i in range(len(audio_files)):
-        image_path = image_dir_path+'\\'+image_files[i]
-        audio_path = audio_dir_path+'\\'+audio_files[i]
+
+
+
+        # image_path = image_dir_path+'\\'+image_files[i]
+        # audio_path = audio_dir_path+'\\'+audio_files[i]
+        image_path = os.path.join(image_dir_path, str(i) + ".png")
+        audio_path = os.path.join(audio_dir_path, str(i) + ".wav")
+
         audio_clip = AudioFileClip(audio_path)
         img_clip = ImageSequenceClip([image_path], audio_clip.duration)
         img_clip = img_clip.set_position(('center', 'center')).fl(fl,apply_to=['mask']).set_duration(audio_clip.duration)

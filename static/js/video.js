@@ -25,6 +25,34 @@ function sendRequest(button) {
 
     }
 
+function send_yi_apiRequest(button) {
+    $('#circle_reading').show();
+     const textarea = document.getElementById("content_data");
+      const text = textarea.value;
+      const title = document.getElementById("title_video");
+      const titletext = title.value;
+      button.classList.add('loading');
+      button.disabled = true;
+        fetch('/single_api', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content: text ,title :titletext})
+            })
+            .then(response => response.text())
+            .then(data => {
+                button.classList.remove('loading');
+                 button.disabled = false;
+                 $('#circle_reading').hide();
+                 alert("合成路径是："+data);
+                 showDetail(titletext);
+            })
+            .catch(error => console.error(error));
+
+    }
+
+
 function showDetail(title){
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {

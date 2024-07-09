@@ -31,6 +31,32 @@ def prompt_generation(param):
     # 输出结果
     return  result_json['response']
 
+def prompt_api_generation(param):
+    pdata = pd.read_csv(project_root + '\\config\\data_1.csv')
+
+    api_url = pdata.iloc[4, 1]
+    api_key = pdata.iloc[5, 1]
+    # 发送HTTP POST请求
+    url = api_url
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": api_key
+    }
+    data = {
+        "model": "yi-large",
+        "messages": [{"role": "user", "content": param}],
+        "temperature": 0.3
+    }
+
+    response = requests.post(url, headers=headers, json=data)
+    response_data = response.json()
+    cotent =response_data['choices'][0]['message']['content']
+    # 输出结果
+    return  cotent
+
+
+
+
 def load_data_text(path,title):
     df = pd.DataFrame(columns=['text', 'index', 'prompt', 'negative'])
     df_temp = pd.read_csv(path)
@@ -47,6 +73,28 @@ def load_data_text(path,title):
         os.makedirs(parent_path)
     df.to_csv(new_path,index=False,encoding='utf-8')
     return new_path
+
+
+def load_api_data_text(path,title):
+    df = pd.DataFrame(columns=['text', 'index', 'prompt', 'negative'])
+    df_temp = pd.read_csv(path)
+    for  index, row in df_temp.iterrows():
+        prompt_param ='根据下面的内容描述，生成一副画面并用英文单词表示：'+row['text']
+        result_json = prompt_api_generation(prompt_param)
+        new_row = {'text': row['text'], 'index': index, 'prompt': prompt + result_json, 'negative': negative}
+        df = df.append(new_row, ignore_index=True)
+    new_path = path.replace("data_split","data_prompt")
+
+    parent_path = new_path.split('\\'+title+'.csv')[0]
+
+    if not os.path.exists(parent_path):
+        os.makedirs(parent_path)
+    df.to_csv(new_path,index=False,encoding='utf-8')
+    return new_path
+
+
+
+
 
 
 def split_data_process(path,title):
@@ -82,6 +130,32 @@ def gen_video(title,content):
     video_path= merge_vedio(image_path,audio_path)
 
     return video_path
+
+
+"""真正api的生成视频"""
+def gen_api_video(title,content):
+    df = pd.DataFrame(columns=['title',  'content'])
+    new_row = {'title': title, 'content': content}
+    df = df.append(new_row, ignore_index=True)
+    df.to_csv(project_root+'\\static\\data\\source_data\\'+title+'.csv', index=False, encoding='utf-8')
+    # 分割数据
+    split_path = split_data_process(project_root+'\\static\\data\\source_data\\'+title+'.csv',title)
+    # 生成提示词
+    prompp_path = load_api_data_text(split_path,title)
+    # 生成语音
+    audio_path = load_source_data_text(split_path)
+    #生成图片
+    image_path = draw_picture(prompp_path)
+    #合成视频
+    video_path= merge_vedio(image_path,audio_path)
+
+    return video_path
+
+
+
+
+
+
 
 
 def remerge_video(imagpath,audio_path,vediopath):

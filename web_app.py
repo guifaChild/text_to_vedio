@@ -5,9 +5,10 @@
 描述：对应的是web版本
 """
 from batch_gen.batch_controller import bach_gen_video
-from single_gen.controller import gen_video, remerge_video
+from single_gen.controller import gen_video, remerge_video,gen_api_video
 from single_gen.single_to_image import regen_video
 from single_gen.single_tts import re_generate_audio
+
 # -*- coding:utf-8 -*-
 """
 作者：张贵发
@@ -185,6 +186,27 @@ def single_gen_video():
     video_path = gen_video(title,content)
 
     return jsonify(video_path)
+
+"""单个视频的生成"""
+@app.route('/single_api', methods=['POST'])
+def single_api_gen_video():
+    data = request.get_json()
+    title = data.get('title')
+    title = title.replace(" ", "").replace(" ", "")
+    content = data.get('content')
+    content = content.replace(" ", "").replace(" ", "")
+    # 根据索引获取指定行数据
+    # 返回 JSON 格式的数据
+    video_path = gen_api_video(title,content)
+
+    return jsonify(video_path)
+
+
+
+
+
+
+
 
 @app.route('/show_detail', methods=['GET'])
 def show_detail():
