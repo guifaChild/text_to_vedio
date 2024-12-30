@@ -19,6 +19,8 @@ function closeModal() {
 function uploadfile(){
     const modal = document.getElementById("upload-form");
     var formData = new FormData(modal);
+    var isChecked = document.getElementById('checkmeout0').checked;
+    formData.append('checked', isChecked);
     var xhr = new XMLHttpRequest();
      xhr.onreadystatechange = function() {
     if (xhr.readyState === XMLHttpRequest.DONE) {

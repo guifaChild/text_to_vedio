@@ -24,7 +24,6 @@ from openpyxl import load_workbook
 from datetime import datetime
 import os
 import shutil
-from data_split import split_data_process
 
 
 current_file_path = os.path.abspath(__file__)
@@ -33,6 +32,16 @@ project_root = os.path.dirname(current_file_path)
 while not os.path.isfile(os.path.join(project_root, 'README.md')):
     project_root = os.path.dirname(project_root)
 app = Flask(__name__,static_folder=project_root+"\\static", template_folder=project_root+"\\templates")
+
+
+
+@app.before_request
+def log_request():
+    print(f"Request received: {request.method} {request.path}")
+
+
+
+
 
 """项目的首页"""
 @app.route('/')
@@ -113,6 +122,7 @@ def open_browser():
 """文件上传，可以直接批量生成视频"""
 @app.route('/upload', methods=['POST'])
 def upload():
+    is_checked = request.form.get('checked') == 'true'
 
     current_date = datetime.now().date()
     print(current_date)
@@ -120,12 +130,21 @@ def upload():
     wb = load_workbook(file)
     sheet = wb.active
     df = pd.DataFrame(sheet.values)
+    if is_checked:
+        # 遍历第二列
+        for i in range(len(df)):
+            # 获取第二列的值
+            value_in_second_column = df.iloc[i, 1]
+            # 调用gpt进行文章进行解析，将之后内容进行替换
+            df.iloc[i, 1] = str(value_in_second_column)
+
     filepath = project_root+'\\static\\data\\data_source\\data\\'+str(current_date)+'.csv'
     df.to_csv(filepath, index=False,header=False)
 
     data = pd.read_csv(project_root+"\\static\\data\\data_source\\data_list\\data_list.csv")
     new_row = {'filename': str(current_date)+'.csv', 'gen_status': '未生成', 'video_path': '无'}
-    data = data.append(new_row, ignore_index=True)
+    # data = data.append(new_row, ignore_index=True)
+    data = pd.concat([data, pd.DataFrame([new_row])], ignore_index=True)
     data.to_csv(project_root+"\\static\\data\\data_source\\data_list\\data_list.csv",  index=False)
 
     list = []
@@ -176,6 +195,7 @@ def viewRow():
 """单个视频的生成"""
 @app.route('/single', methods=['POST'])
 def single_gen_video():
+
     data = request.get_json()
     title = data.get('title')
     title = title.replace(" ", "").replace(" ", "")
@@ -188,18 +208,19 @@ def single_gen_video():
     return jsonify(video_path)
 
 """单个视频的生成"""
-@app.route('/single_api', methods=['POST'])
-def single_api_gen_video():
-    data = request.get_json()
-    title = data.get('title')
-    title = title.replace(" ", "").replace(" ", "")
-    content = data.get('content')
-    content = content.replace(" ", "").replace(" ", "")
-    # 根据索引获取指定行数据
-    # 返回 JSON 格式的数据
-    video_path = gen_api_video(title,content)
-
-    return jsonify(video_path)
+# @app.route('/single_api', methods=['POST'])
+# def single_api_gen_video():
+#     print("jinru---")
+#     data = request.get_json()
+#     title = data.get('title')
+#     title = title.replace(" ", "").replace(" ", "")
+#     content = data.get('content')
+#     content = content.replace(" ", "").replace(" ", "")
+#     # 根据索引获取指定行数据
+#     # 返回 JSON 格式的数据
+#     video_path = gen_api_video(title,content)
+#
+#     return jsonify(video_path)
 
 
 
@@ -285,12 +306,14 @@ def show_batch_detail():
 def batch_gen_video():
     data = pd.read_csv(project_root+'\\static\\data\\data_source\\data_list\\data_list.csv')
     new_index = int(request.args.get('index'))
+
     # 根据索引获取指定行数据
     row = data.iloc[new_index][0]
     # 返回 JSON 格式的数据
     file_path = project_root+'\\static\\data\\data_source\\data\\' + row
-    video_path = bach_gen_video(file_path,row)
 
+
+    video_path = bach_gen_video(file_path, row)
     data.iloc[new_index, 1]='已生成'
     data.iloc[new_index, 2] = video_path
     data.to_csv(project_root+"\\static\\data\\data_source\\data_list\\data_list.csv",  index=False)
@@ -373,11 +396,7 @@ def remerge():
     video_html_path = data.get('image_path')
     path = str(video_html_path).split('.mp4')[0]
     path_item = path.split("/")
-    audeo_path = ""
-    image_path = ""
-    vedio_path = ""
-    title =""
-    filename =""
+
     if path_item[-1] == path_item[-2]:
         title=path_item[-1]
         audeo_path = project_root + '\\static\\data\\data_audio\\' + title + '\\' + title
@@ -390,6 +409,7 @@ def remerge():
         image_path = project_root + '\\static\\data\\data_image\\' + filename + '\\' + title
         vedio_path = project_root + '\\static\\data\\data_vedio\\' + filename + '\\' + title
     return remerge_video(image_path,audeo_path,vedio_path)
+
 
 
 

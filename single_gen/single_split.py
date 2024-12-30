@@ -7,9 +7,9 @@
 
 import pandas as pd
 import os
+import re
+def split_data_process_old(path):
 
-def split_data_process(path):
-    data_csv_path=""
     df = pd.read_csv(path)
     for i in range(len(df)):
         type_path = df["type"][i]
@@ -26,7 +26,49 @@ def split_data_process(path):
     return "data/data_split"
 
 
+def split_data_process(path):
+    # 读取CSV文件，去除空白行
+    df = pd.read_csv(path)
+    df.dropna(inplace=True)  # 去除空白行
+
+    results = []  # 用于存储最终结果
+
+    for _, row in df.iterrows():
+        # 按照中英文句号保留分隔符进行分割
+        segments = [seg + '.' for seg in re.split('(?<=[。.])', row['content']) if len(seg.strip()) > 0]
+
+        for segment in segments:
+            # 检查长度并按需进一步分割
+            if len(segment) > 30:
+                sub_segments = [sub_seg + ',' for sub_seg in re.split('(?<=[,，])', segment) if len(sub_seg.strip()) > 0]
+                # 处理逗号分割后仍过长的情况
+                for sub in sub_segments:
+                    if len(sub) > 30:
+                        chunk_size = 10
+                        chunks = [sub[i:i + chunk_size] for i in range(0, len(sub), chunk_size)]
+                        results.extend(chunks)
+                    else:
+                        results.append(sub)
+            else:
+                results.append(segment)
+
+    # 处理长度小于5的情况，将其合并到前一条内容
+    final_results = []
+    for text in results:
+        if len(text) < 5 and final_results:
+            final_results[-1] += text
+        else:
+            final_results.append(text)
+
+    # 写入新的CSV文件
+    final_df = pd.DataFrame(final_results, columns=["text"])
+    final_df.to_csv("split_contents.csv", index=False)
+#
+#
+# return "data/data_split"
+
+
 
 if __name__ == '__main__':
-    # split_data_process("data/source_data/example.csv")
+    split_data_process_old("../static/data/source_data/zuizhong.csv")
     print(pd.__version__)
