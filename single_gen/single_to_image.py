@@ -11,8 +11,18 @@ import io
 from PIL import Image
 import pandas as pd
 import requests
+# from nsfw_detector import predict
 
+current_file_path = os.path.abspath(__file__)
 
+# 逐级向上获取上级目录，直到达到项目根目录
+project_root = os.path.dirname(current_file_path)
+while not os.path.isfile(os.path.join(project_root, 'README.md')):
+    project_root = os.path.dirname(project_root)
+
+print(project_root+'\\config\\saved_model.h5')
+
+# model = predict.load_model(project_root+'\\config\\saved_model.h5')
 
 
 def draw_picture(path):
@@ -24,7 +34,7 @@ def draw_picture(path):
           "firstphase_width": 0,
           "firstphase_height": 0,
           "hr_scale": 2,
-          "hr_upscaler": "string",
+          "hr_upscaler": "",
           "hr_second_pass_steps": 0,
           "hr_resize_x": 0,
           "hr_resize_y": 0,
@@ -37,18 +47,18 @@ def draw_picture(path):
           "subseed_strength": 0,
           "seed_resize_from_h": -1,
           "seed_resize_from_w": -1,
-          "sampler_name": "DPM++ SDE Karras",
+          "sampler_name": "Euler",
           "batch_size": 1,
           "n_iter": 1,
           "steps": 50,
           "cfg_scale": 7,
-          "width": 1024,
+          "width": 768,
           "height": 768,
           "restore_faces": "false",
           "tiling": "false",
           "do_not_save_samples": "false",
           "do_not_save_grid": "false",
-          "negative_prompt": row["negative"],
+          "negative_prompt": "{}".format(row["negative"]),
           "eta": 0,
           "s_churn": 0,
           "s_tmax": 0,
@@ -57,7 +67,7 @@ def draw_picture(path):
           "override_settings": {},
           "override_settings_restore_afterwards": "true",
           "script_args": [],
-          "sampler_index": "DPM++ SDE Karras",
+          "sampler_index": "Euler",
           "script_name": "",
           "send_images": "true",
           "save_images": "true",
@@ -75,6 +85,14 @@ def draw_picture(path):
         image_path = os.path.join(new_path,str(index)+".png")
         # print(image_path)
         image.save(image_path)
+    #     验证是否涉黄
+    #     result_data = predict.classify(model,image_path)
+    #     if result_data[image_path]["sexy"] > 0.5:
+    #         print("黄色图片")
+    #         regen_video(row["prompt"],row["negative"],image_path)
+    #     else:
+    #         print("非黄色图片")
+
     return new_path
 
 
@@ -85,14 +103,14 @@ def draw_picture(path):
 
 
 def regen_video(imageprompt,imagenegitve,newpath):
-
+    os.remove(newpath)
     novel_dict = {
       "enable_hr": "false",
       "denoising_strength": 0,
       "firstphase_width": 0,
       "firstphase_height": 0,
       "hr_scale": 2,
-      "hr_upscaler": "string",
+      "hr_upscaler": "",
       "hr_second_pass_steps": 0,
       "hr_resize_x": 0,
       "hr_resize_y": 0,
@@ -105,18 +123,18 @@ def regen_video(imageprompt,imagenegitve,newpath):
       "subseed_strength": 0,
       "seed_resize_from_h": -1,
       "seed_resize_from_w": -1,
-      "sampler_name": "DPM++ SDE Karras",
+      "sampler_name": "Euler",
       "batch_size": 1,
       "n_iter": 1,
       "steps": 50,
       "cfg_scale": 7,
-      "width": 1024,
+      "width": 768,
       "height": 768,
       "restore_faces": "false",
       "tiling": "false",
       "do_not_save_samples": "false",
       "do_not_save_grid": "false",
-      "negative_prompt": imagenegitve,
+      "negative_prompt":  imagenegitve,
       "eta": 0,
       "s_churn": 0,
       "s_tmax": 0,
@@ -125,7 +143,7 @@ def regen_video(imageprompt,imagenegitve,newpath):
       "override_settings": {},
       "override_settings_restore_afterwards": "true",
       "script_args": [],
-      "sampler_index": "DPM++ SDE Karras",
+      "sampler_index": "Euler",
       "script_name": "",
       "send_images": "true",
       "save_images": "true",
@@ -140,6 +158,10 @@ def regen_video(imageprompt,imagenegitve,newpath):
 
     # print(image_path)
     image.save(newpath)
+    result_data = predict.classify(model,newpath)
+    if result_data[newpath]["sexy"] > 0.5:
+        regen_video(imageprompt,imagenegitve,newpath)
+    #     验证是否涉黄
     return newpath
 
 

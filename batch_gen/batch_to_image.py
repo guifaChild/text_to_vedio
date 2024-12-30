@@ -19,49 +19,26 @@ def draw_picture(path):
     df = pd.read_csv(path)
     for index,row in df.iterrows():
         novel_dict = {
-          "enable_hr": "false",
-          "denoising_strength": 0,
-          "firstphase_width": 0,
-          "firstphase_height": 0,
-          "hr_scale": 2,
-          "hr_upscaler": "string",
-          "hr_second_pass_steps": 0,
-          "hr_resize_x": 0,
-          "hr_resize_y": 0,
+          "mask":"",
+          "mask_blur":4,
           "prompt": "{}".format(row["prompt"]),
-          "styles": [
-            "string"
-          ],
-          "seed": -1,
-          "subseed": -1,
-          "subseed_strength": 0,
-          "seed_resize_from_h": -1,
-          "seed_resize_from_w": -1,
-          "sampler_name": "DPM++ SDE Karras",
           "batch_size": 1,
-          "n_iter": 1,
-          "steps": 50,
-          "cfg_scale": 7,
-          "width": 1024,
-          "height": 768,
-          "restore_faces": "false",
-          "tiling": "false",
-          "do_not_save_samples": "false",
-          "do_not_save_grid": "false",
+          "steps": 10,
+          "cfg_scale": 1,
           "negative_prompt": row["negative"],
-          "eta": 0,
-          "s_churn": 0,
-          "s_tmax": 0,
-          "s_tmin": 0,
-          "s_noise": 1,
-          "override_settings": {},
+          "width": 1056,
+          "height": 594,
+          "seed": -1,
+          "sampler_name": "DPM++ 2M",
+          "enable_hr": "false",
+          "hr_upscaler": "R-ESRGAN 4x+",
+          "hr_second_pass_steps":6,
+          "denoising_strength":0.5,
           "override_settings_restore_afterwards": "true",
-          "script_args": [],
-          "sampler_index": "DPM++ SDE Karras",
-          "script_name": "",
-          "send_images": "true",
-          "save_images": "true",
-          "alwayson_scripts": {}
+          "hr_scale": 2,
+          "scheduler":"SGM Uniform"
+
+
         }
 
         sd_url = "http://127.0.0.1:7860/sdapi/v1/txt2img"

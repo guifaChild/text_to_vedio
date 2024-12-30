@@ -6,12 +6,14 @@
 """
 
 import os
-from moviepy.editor import ImageSequenceClip, AudioFileClip, concatenate_videoclips
+from moviepy.video.io.ImageSequenceClip import ImageSequenceClip
+from moviepy.audio.io.AudioFileClip import AudioFileClip
+from moviepy.video.compositing.CompositeVideoClip import concatenate_videoclips
 
 
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
-from single_gen.jianying import draft_content
+from .jianying import draft_content
 
 speed = 10
 size = 700

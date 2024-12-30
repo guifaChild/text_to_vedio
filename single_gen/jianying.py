@@ -8,7 +8,9 @@ import json
 import os
 import uuid
 import pandas as pd
-from moviepy.editor import  AudioFileClip
+
+from moviepy.audio.io.AudioFileClip import AudioFileClip
+
 current_file_path = os.path.abspath(__file__)
 
 # 逐级向上获取上级目录，直到达到项目根目录

@@ -6,7 +6,10 @@
 """
 
 import os
-from moviepy.editor import ImageSequenceClip, AudioFileClip, concatenate_videoclips
+
+from moviepy.video.io.ImageSequenceClip import ImageSequenceClip
+from moviepy.audio.io.AudioFileClip import AudioFileClip
+from moviepy.video.compositing.CompositeVideoClip import concatenate_videoclips
 import numpy as np
 
 import random
@@ -54,7 +57,7 @@ def merge_vedio(image_dir_path,audio_dir_path,parent):
         clip.write_videofile(new_parent + "\\" + str(i) + ".mp4", fps=24, audio_codec="aac")
 
     new_path = image_dir_path.replace("data_image","data_vedio")
-    reulst_path = '\\'.join(new_path.rsplit('\\', 2)[:-1])+'\\'+parent
+    reulst_path = '\\'.join(new_path.split('\\', 2)[:-1])+'\\'+parent
     if not os.path.exists(reulst_path):
         os.makedirs(reulst_path)
     items = os.listdir(new_parent)
